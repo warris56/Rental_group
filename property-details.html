@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - RentGhana</title>
+    <link rel="stylesheet" href="RentGhana.css">
+    <link rel="stylesheet" href="property-details.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rent<span>Ghana</span></a>
+            <div class="nav-links">
+                <a href="index.html#properties">Browse Properties</a>
+                <a href="index.html#about">About Us</a>
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="register-choice.html" class="btn-primary">Register</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loading" style="text-align: center; padding: 3rem;">
+        <h3>Loading property details...</h3>
+        <div class="loader" style="margin: 2rem auto;"></div>
+    </div>
+
+    <!-- Property Details Container -->
+    <div class="property-details-container" id="propertyDetails" style="display: none;">
+        <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Properties
+            </a>
+        </div>
+
+        <!-- Property Header -->
+        <div class="property-header">
+            <h1 id="propertyTitle">Loading...</h1>
+            <div class="property-price-large" id="propertyPrice">Loading...</div>
+            <div class="property-location-large">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="propertyLocation">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <h2><i class="fas fa-images"></i> Photo Gallery</h2>
+            <div class="gallery-container">
+                <div class="main-image-container">
+                    <img id="mainImage" src="" alt="Property Image" class="main-image">
+                    <button class="gallery-nav prev" onclick="prevImage()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav next" onclick="nextImage()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="thumbnail-container" id="thumbnailContainer">
+                    <!-- Thumbnails will be added by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Details Grid -->
+        <div class="property-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Description Section -->
+                <section class="details-section">
+                    <h2><i class="fas fa-info-circle"></i> Description</h2>
+                    <p id="propertyDescription" class="property-description">Loading description...</p>
+                </section>
+
+                <!-- Key Features -->
+                <section class="details-section">
+                    <h2><i class="fas fa-star"></i> Key Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="feature-details">
+                                <span class="feature-label">Bedrooms</span>
+                                <span class="feature-value" id="bedroomsCount">0</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bath"></i>
+                            </div>
+                            <div class="feature-details">
+                                <span class="feature-label">Bathrooms</span>
+                                <span class="feature-value" id="bathroomsCount">0</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="feature-details">
+                                <span class="feature-label">Property Type</span>
+                                <span class="feature-value" id="propertyType">Loading</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-city"></i>
+                            </div>
+                            <div class="feature-details">
+                                <span class="feature-label">City</span>
+                                <span class="feature-value" id="propertyCity">Loading</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Amenities Section -->
+                <section class="details-section">
+                    <h2><i class="fas fa-concierge-bell"></i> Amenities</h2>
+                    <div class="amenities-grid" id="amenitiesList">
+                        <!-- Amenities will be added by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Map Section -->
+                <section class="details-section">
+                    <h2><i class="fas fa-map"></i> Location</h2>
+                    <div class="map-container">
+                        <div id="map" class="property-map"></div>
+                        <div class="map-instructions">
+                            <p><i class="fas fa-info-circle"></i> Click and drag to explore the area</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column - Sidebar -->
+            <div class="right-column">
+                <!-- Landlord Info Card -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-user-tie"></i> Landlord Information</h3>
+                    <div class="landlord-info">
+                        <div class="landlord-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="landlord-details">
+                            <h4 id="landlordName">Loading...</h4>
+                            <p id="landlordType">Landlord</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-envelope"></i> <span id="landlordEmail">Loading...</span></p>
+                                <p><i class="fas fa-phone"></i> <span id="landlordPhone">Loading...</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary btn-full" onclick="contactLandlord()">
+                        <i class="fas fa-comment"></i> Contact Landlord
+                    </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn-primary btn-full" onclick="applyForProperty()" id="applyBtn">
+                            <i class="fas fa-file-alt"></i> Apply for Property
+                        </button>
+                        <button class="btn-secondary btn-full" onclick="saveProperty()" id="saveBtn">
+                            <i class="far fa-heart"></i> Save Property
+                        </button>
+                        <button class="btn-outline btn-full" onclick="shareProperty()">
+                            <i class="fas fa-share-alt"></i> Share Property
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Property Status -->
+                <div class="sidebar-card status-card">
+                    <h3><i class="fas fa-clipboard-check"></i> Property Status</h3>
+                    <div class="status-info">
+                        <span class="status-badge available" id="propertyStatus">
+                            <i class="fas fa-check-circle"></i> Available
+                        </span>
+                        <p class="status-text" id="statusText">This property is currently available for rent</p>
+                        <div class="status-details">
+                            <p><i class="fas fa-calendar"></i> Listed on: <span id="listedDate">Loading...</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Similar Properties (optional) -->
+                <div class="sidebar-card" id="similarProperties" style="display: none;">
+                    <h3><i class="fas fa-home"></i> Similar Properties</h3>
+                    <div class="similar-list" id="similarList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Rent<span>Ghana</span></h3>
+                    <p>Your trusted partner in finding the perfect home in Ghana.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="index.html#properties">Browse Properties</a>
+                    <a href="index.html#about">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>For Landlords</h4>
+                    <a href="register.html">List Your Property</a>
+                    <a href="login.html">Landlord Login</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@rentghana.com</p>
+                    <p>Phone: +233 XX XXX XXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentGhana. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Google Maps API - Replace with your own key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbiRq0O_lqoTQcazpzV3yA2kQ6Jk3xXKc&callback=initMap" async defer></script>
+    <script src="property-details.js"></script>
+</body>
+</html>

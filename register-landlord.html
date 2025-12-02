@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landlord Registration - RentGhana</title>
+    <link rel="stylesheet" href="auth-style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Left Side - Branding -->
+        <div class="auth-left">
+            <div class="brand-content">
+                <h1 class="brand-logo">Rent<span>Ghana</span></h1>
+                <h2>Join as a Landlord</h2>
+                <p>Manage your properties professionally</p>
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="icon">✓</span>
+                        <span>List unlimited properties</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✓</span>
+                        <span>Manage applications efficiently</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✓</span>
+                        <span>Track maintenance requests</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✓</span>
+                        <span>Communicate with tenants</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <div class="form-header">
+                    <h2>Create Landlord Account</h2>
+                    <p>Fill in your details to get started</p>
+                </div>
+
+                <!-- Access Key Info Box -->
+                <div class="access-key-info">
+                    <div class="icon">🔑</div>
+                    <div class="text">
+                        <strong>Access Key Required</strong>
+                        <p>Landlord accounts require a special access key. Contact support to get your key.</p>
+                    </div>
+                </div>
+
+                <form id="landlordRegisterForm" class="auth-form">
+                    <!-- Access Key (Required) -->
+                    <div class="form-group">
+                        <label for="accessKey">Access Key * (Contact admin for key)</label>
+                        <input 
+                            type="text" 
+                            id="accessKey" 
+                            name="accessKey" 
+                            placeholder="Enter your access key"
+                            required
+                        >
+                        <span class="error-message" id="accessKeyError"></span>
+                    </div>
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name / Business Name *</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            placeholder="John Doe / ABC Properties Ltd"
+                            required
+                        >
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="your.email@example.com"
+                            required
+                        >
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="+233 XX XXX XXXX"
+                            required
+                        >
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <!-- Business Registration (Optional) -->
+                    <div class="form-group">
+                        <label for="businessReg">Business Registration Number (Optional)</label>
+                        <input 
+                            type="text" 
+                            id="businessReg" 
+                            name="businessReg" 
+                            placeholder="Registration number if applicable"
+                        >
+                        <span class="error-message" id="businessRegError"></span>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label for="address">Business Address</label>
+                        <input 
+                            type="text" 
+                            id="address" 
+                            name="address" 
+                            placeholder="Your office/business address"
+                        >
+                        <span class="error-message" id="addressError"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Create a strong password"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                                👁️
+                            </button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                placeholder="Re-enter your password"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                                👁️
+                            </button>
+                        </div>
+                        <span class="error-message" id="confirmPasswordError"></span>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" required>
+                            <span>I agree to the <a href="#" style="color: #667eea;">Terms and Conditions</a></span>
+                        </label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span id="registerText">Create Landlord Account</span>
+                        <span id="registerLoader" class="loader" style="display: none;"></span>
+                    </button>
+
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+
+                    <div class="alt-actions">
+                        <p>Already have an account?</p>
+                        <a href="login.html" class="link-btn">Login instead</a>
+                    </div>
+
+                    <div class="back-home">
+                        <a href="register-choice.html">← Back to account selection</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="register-landlord.js"></script>
+</body>
+</html>

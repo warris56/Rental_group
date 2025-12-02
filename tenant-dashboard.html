@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Dashboard - RentGhana</title>
+    <link rel="stylesheet" href="tenant-dashboard-style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <h2>Rent<span>Ghana</span></h2>
+            <p class="user-type">Tenant Portal</p>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#overview" class="nav-item active" onclick="showSection('overview')">
+                <span class="icon">📊</span>
+                <span>Overview</span>
+            </a>
+            <a href="#properties" class="nav-item" onclick="showSection('properties')">
+                <span class="icon">🏠</span>
+                <span>Saved Properties</span>
+            </a>
+            <a href="#applications" class="nav-item" onclick="showSection('applications')">
+                <span class="icon">📝</span>
+                <span>My Applications</span>
+            </a>
+            <a href="#maintenance" class="nav-item" onclick="showSection('maintenance')">
+                <span class="icon">🔧</span>
+                <span>Maintenance</span>
+            </a>
+            <div class="nav-item" onclick="showSection('documents')">
+                <span class="nav-icon">📄</span>
+                <span class="nav-text">My Documents</span>
+            </div>
+            <a href="#profile" class="nav-item" onclick="showSection('profile')">
+                <span class="icon">👤</span>
+                <span>Profile</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item">
+                <span class="icon">🏡</span>
+                <span>Browse Properties</span>
+            </a>
+            <a href="#" class="nav-item" onclick="logout()">
+                <span class="icon">🚪</span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <h1 id="pageTitle">Dashboard Overview</h1>
+            <div class="user-info">
+                <!-- Notification Bell -->
+                <button class="icon-btn" onclick="showSection('notifications')" title="Notifications" style="position: relative; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; margin-right: 1rem;">
+                    🔔
+                    <span id="notificationBadge" style="position: absolute; top: 0; right: 0; background: #e74c3c; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 0.7rem; display: none; align-items: center; justify-content: center; font-weight: bold;">0</span>
+                </button>
+                
+                <span id="userName">Loading...</span>
+                <div class="avatar">👤</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <div class="welcome-card">
+                    <h2>Welcome back, <span id="userNameWelcome">Tenant</span>! 👋</h2>
+                    <p>Here's what's happening with your rental journey today.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏠</div>
+                        <div class="stat-info">
+                            <h3 id="savedCount">0</h3>
+                            <p>Saved Properties</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-info">
+                            <h3 id="applicationsCount">0</h3>
+                            <p>Active Applications</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔧</div>
+                        <div class="stat-info">
+                            <h3 id="maintenanceCount">0</h3>
+                            <p>Maintenance Requests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <h3 id="completedCount">0</h3>
+                            <p>Completed Tasks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="section-card">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="window.location.href='index.html'">
+                            <span class="icon">🔍</span>
+                            <span>Browse Properties</span>
+                        </button>
+                        <button class="action-btn" onclick="showSection('applications')">
+                            <span class="icon">📝</span>
+                            <span>Submit Application</span>
+                        </button>
+                        <button class="action-btn" onclick="showSection('maintenance')">
+                            <span class="icon">🔧</span>
+                            <span>Request Maintenance</span>
+                        </button>
+                        <button class="action-btn" onclick="showSection('profile')">
+                            <span class="icon">⚙️</span>
+                            <span>Update Profile</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section-card">
+                    <h3>Recent Activity</h3>
+                    <div id="recentActivity" class="activity-list">
+                        <div class="activity-item">
+                            <span class="activity-icon">🏠</span>
+                            <div class="activity-details">
+                                <p class="activity-title">Welcome to RentGhana!</p>
+                                <p class="activity-time">Start browsing properties to find your perfect home</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Saved Properties Section -->
+            <section id="properties-section" class="content-section">
+                <div class="section-header">
+                    <h2>Saved Properties</h2>
+                    <button class="btn-primary" onclick="window.location.href='index.html'">
+                        Browse More
+                    </button>
+                </div>
+                <div id="savedPropertiesList" class="properties-grid">
+                    <div class="empty-state">
+                        <span class="empty-icon">🏠</span>
+                        <h3>No saved properties yet</h3>
+                        <p>Browse properties and save your favorites to view them here</p>
+                        <button class="btn-primary" onclick="window.location.href='index.html'">
+                            Browse Properties
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Applications Section -->
+            <section id="applications-section" class="content-section">
+                <div class="section-header">
+                    <h2>My Applications</h2>
+                    <button class="btn-primary" onclick="openApplicationModal()">
+                        + New Application
+                    </button>
+                </div>
+                <div id="applicationsList" class="applications-list">
+                    <div class="empty-state">
+                        <span class="empty-icon">📝</span>
+                        <h3>No applications submitted yet</h3>
+                        <p>When you apply for properties, you'll see them here</p>
+                        <button class="btn-primary" onclick="window.location.href='index.html'">
+                            Find Properties
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Maintenance Section -->
+            <section id="maintenance-section" class="content-section">
+                <div class="section-header">
+                    <h2>Maintenance Requests</h2>
+                    <button class="btn-primary" onclick="openMaintenanceModal()">
+                        + New Request
+                    </button>
+                </div>
+                <div id="maintenanceList" class="maintenance-list">
+                    <div class="empty-state">
+                        <span class="empty-icon">🔧</span>
+                        <h3>No maintenance requests</h3>
+                        <p>Submit a maintenance request when you need repairs</p>
+                    </div>
+                </div>
+            </section>
+
+            <div id="documents-section" class="content-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h2 style="margin: 0 0 0.5rem 0;">📄 My Documents</h2>
+                        <p style="margin: 0; color: #666;">Manage your important documents like leases, IDs, and proof of income</p>
+                    </div>
+                    <button class="btn-primary" onclick="openUploadDocumentModal()">
+                        📤 Upload Document
+                    </button>
+                </div>
+                <div id="userDocumentsList">
+                    <div class="loading-state" style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+                        <p style="color: #666;">Loading documents...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <section id="notifications-section" class="content-section">
+                <div class="section-header">
+                    <h2>🔔 Notifications</h2>
+                    <button class="btn-secondary" onclick="markAllNotificationsRead()">
+                        Mark All as Read
+                    </button>
+                </div>
+                <div id="notificationsList" class="notifications-list">
+                    <div class="empty-state">
+                        <span class="empty-icon">🔔</span>
+                        <h3>No notifications</h3>
+                        <p>You're all caught up!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                    <button class="btn-primary" onclick="enableEdit()">
+                        Edit Profile
+                    </button>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <p id="profileName">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Email</label>
+                            <p id="profileEmail">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone</label>
+                            <p id="profilePhone">Loading...</p>
+                        </div>
+                        <div class="info-group">
+                            <label>ID Number</label>
+                            <p id="profileId">Not provided</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Member Since</label>
+                            <p id="profileDate">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="tenant-dashboard.js"></script>
+</body>
+</html>
